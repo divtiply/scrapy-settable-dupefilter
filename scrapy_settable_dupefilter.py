@@ -8,7 +8,7 @@ class SettableRFPDupeFilter(RFPDupeFilter):
     
     def __init__(self, *args, **kwargs):
         super(SettableRFPDupeFilter, self).__init__(*args, **kwargs)
-        self.logmarkdupes = True
+        self.logsetseen = True
 
     def request_seen(self, request):
         return (
@@ -22,12 +22,12 @@ class SettableRFPDupeFilter(RFPDupeFilter):
             msg = "Bypassed request set seen: %(request)s (referer: %(referer)s)"
             args = {'request': request, 'referer': referer_str(request) }
             self.logger.debug(msg, args, extra={'spider': spider})
-        elif self.logmarkdupes:
+        elif self.logsetseen:
             msg = ("Bypassed request set seen: %(request)s"
-                   " - no more duplicates will be shown"
+                   " - no more set seen duplicates will be shown"
                    " (see DUPEFILTER_DEBUG to show all duplicates)")
             self.logger.debug(msg, {'request': request}, extra={'spider': spider})
-            self.logmarkdupes = False
+            self.logsetseen = False
 
         spider.crawler.stats.inc_value('dupefilter/bypassed', spider=spider)
 
