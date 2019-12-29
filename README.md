@@ -21,7 +21,3 @@ def start_requests(self):
     set_seen_requests_from(seen_urls)
     super().start_requests()
 ```
-
-## License
-
-MIT
