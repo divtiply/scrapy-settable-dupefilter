@@ -19,17 +19,17 @@ class SettableRFPDupeFilter(RFPDupeFilter):
         if request.meta.get('request_seen') == None:
             return super(SettableRFPDupeFilter, self).log(request, spider)
         if self.debug:
-            msg = "Bypassed request set seen: %(request)s (referer: %(referer)s)"
+            msg = "Set request seen: %(request)s (referer: %(referer)s)"
             args = {'request': request, 'referer': referer_str(request) }
             self.logger.debug(msg, args, extra={'spider': spider})
         elif self.logsetseen:
-            msg = ("Bypassed request set seen: %(request)s"
+            msg = ("Set request seen: %(request)s"
                    " - no more set seen duplicates will be shown"
                    " (see DUPEFILTER_DEBUG to show all duplicates)")
             self.logger.debug(msg, {'request': request}, extra={'spider': spider})
             self.logsetseen = False
 
-        spider.crawler.stats.inc_value('dupefilter/bypassed', spider=spider)
+        spider.crawler.stats.inc_value('dupefilter/set_seen', spider=spider)
 
 
 def make_seen_request_from_url(url, **kwargs):
