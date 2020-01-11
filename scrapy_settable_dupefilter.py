@@ -47,8 +47,8 @@ def set_seen_requests_from(filepath, urlfield='url', filetype=None):
     with open(filepath, encoding='utf-8') as f:
         if filetype == 'jsonlines':
             for line in f:
-                json_line = json.loads(line)
-                url = json_line[urlfield]
+                item = json.loads(line)
+                url = item[urlfield]
                 yield make_seen_request_from_url(url)
         else:  # text, one url per line
             for url in f:
