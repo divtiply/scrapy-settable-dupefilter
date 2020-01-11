@@ -44,7 +44,7 @@ def set_seen_requests_from(filepath, urlfield='url', filetype=None):
         ):
             filetype = 'jsonlines'
     
-    with open(filepath) as f:
+    with open(filepath, encoding='utf-8') as f:
         if filetype == 'jsonlines':
             for line in f:
                 json_line = json.loads(line)
