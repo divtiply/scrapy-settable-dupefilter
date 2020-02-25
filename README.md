@@ -8,7 +8,7 @@ Add following to the project `settings.py`:
 DUPEFILTER_CLASS = 'scrapy_settable_dupefilter.SettableRFPDupeFilter'
 ```
 
-Any request can be set as seen with `seen_request` request meta.
+A request can be set as seen by providing `seen_request=True` within request meta.
 Seen requests and all subsequent request to the same resource are filtered out.
 
 It is possible to populate dupefilter seen requests from file:
